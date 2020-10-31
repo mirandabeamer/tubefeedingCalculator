@@ -1,0 +1,30 @@
+
+
+.btn {
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
+.jumbotron {
+    height: 150px;
+    background-color: #1A4465;
+    color: white;
+    font-family: 'Rammetto One', cursive;
+}
+
+#tagline {
+    color: #A9C2D4;
+    font-family: 'times new roman';
+}
+
+#header {
+    font-size: 300%;
+}
+
+body {
+    color: #1A4465;
+}
+
+a:active {
+    color: #1A4465;
+}
