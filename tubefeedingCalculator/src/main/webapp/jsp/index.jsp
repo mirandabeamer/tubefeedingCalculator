@@ -26,16 +26,16 @@
                 <div class="col-lg-12">
                     <p>${errorMessage}</p>
                     <div class="col-lg-3"></div>
-                    <a class="btn btn-default col-lg-3 <c:if test="${regimen == 'bolus'}"> active </c:if>" 
-                       href="${pageContext.request.contextPath}/setRegimenToBolus">Bolus</a>
-                    <a class="btn btn-default col-lg-3 <c:if test="${regimen == 'continuous'}"> active </c:if>"
-                       href="${pageContext.request.contextPath}/setRegimenToContinuous">Continuous</a>
+                    <button class="btn btn-default col-lg-3
+                            <c:if test="${regimen == 'bolus'}">active</c:if>" id="bolus" value="bolus">Bolus</button>
+                    <button class="btn btn-default col-lg-3
+                            <c:if test="${regimen == 'continuous'}">active</c:if>" id="continuous" value="continuous">Continuous</button>
                 </div>
                 <form method="POST" action="calculateFeeds">
                     <div class="form-group">
                         <label for ="companyName">Select Company</label>
                         <select id="companyName" class="form-control" name="company">
-                            <option class="disabled">Select company</option>
+                            <option value="default" class="disabled">Select company</option>
                             <c:forEach var="currentCompany" items="${companies}">
                                 <option value="${currentCompany.companyId}"
                                         <c:if test="${currentCompany.companyId == companyId}">selected</c:if>>
@@ -53,26 +53,29 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <c:if test="${regimen == 'continuous'}">
-                        <div class="form-group">
-                            <label for="rate">Rate (ml)</label>
-                            <input id="rate" class="form-control" name="rate" type="number" value="${rate}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="hours">Hours per day</label>
-                            <input id="hours" class="form-control" name="hours" type="number" value="${hours}" required>
-                        </div>
-                    </c:if>
-                    <c:if test="${regimen == 'bolus'}">
-                        <div class="form-group">
-                            <label for="rate">Bolus Volume (ml)</label>
-                            <input id="rate" class="form-control" name="rate" type="number" value="${rate}" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="hours">Boluses per day</label>
-                            <input id="hours" class="form-control" name="hours" type="number" value="${hours}" required>
-                        </div>
-                    </c:if>
+                    <div id="rateHoursInput">
+                        <c:if test="${regimen == 'continuous'}">
+                            <div class="form-group">
+                                <label for="rate">Rate (ml)</label>
+                                <input id="rate" class="form-control" name="rate" type="number" value="${rate}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hours">Hours per day</label>
+                                <input id="hours" class="form-control" name="hours" type="number" value="${hours}" required>
+                            </div>
+                        </c:if>
+                        <c:if test="${regimen == 'bolus'}">
+                            <div class="form-group">
+                                <label for="rate">Bolus Volume (ml)</label>
+                                <input id="rate" class="form-control" name="rate" type="number" value="${rate}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="hours">Boluses per day</label>
+                                <input id="hours" class="form-control" name="hours" type="number" value="${hours}" required>
+                            </div>
+                        </c:if>
+                    </div>
+                    <input style="display:none" id="regimen" name="regimen" value="bolus"/>
                     <button id="calculate" type="submit" class="btn">Calculate</button>
                 </form>
             </div>
@@ -84,7 +87,7 @@
                     </h4>
                     <hr/>
                     <h5>Total daily volume: ${volume}ml</h5>
-                    <table class="col-sm-4 table-condensed table" style="border: solid black" id="resultsTable">
+                    <table class="col-sm-4 table-condensed table" id="resultsTable">
                         <thead>
                             <tr>
                                 <th scope="col" class="col-sm-8"><h4>Calories</h4></td>

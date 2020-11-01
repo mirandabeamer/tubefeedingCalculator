@@ -54,6 +54,7 @@ public class tubefeedingController {
         model.addAttribute("rate", rate);
         model.addAttribute("hours", hours);
         model.addAttribute("companyId", companyId);
+        formulas = service.getAllFormulas();
         List<Company> companies = service.getAllCompanies();
         model.addAttribute("companies", companies);
         return "index";
@@ -64,9 +65,19 @@ public class tubefeedingController {
     public List<Formula> getCompany(@RequestBody Map<String, String> companyMap) {
         Map<String, String> criteria = new HashMap<>();
         String companyIdStr = companyMap.get("company");
+        if (companyIdStr.equals("default")) {
+            formulas = service.getAllFormulas();
+            return formulas;
+        }
         int companyId = Integer.parseInt(companyIdStr);
-
         formulas = service.getFormulaByCompany(companyId);
+        return formulas;
+    }
+
+    @RequestMapping(value = "/formulas", method = RequestMethod.GET)
+    @ResponseBody
+    public List<Formula> getAllFormulas() {
+        formulas = service.getAllFormulas();
         return formulas;
     }
 
@@ -128,27 +139,10 @@ public class tubefeedingController {
         return "redirect:displayFormulary";
     }
 
-    @RequestMapping(value = "/setRegimenToBolus", method = RequestMethod.GET)
-    public String setRegimenToBolus(HttpServletRequest request) {
-        //reset any information entered. 
-        rate = 0;
-        hours = 0;
-        regimen = "bolus";
-        return "redirect:/";
-    }
-
-    @RequestMapping(value = "/setRegimenToContinuous", method = RequestMethod.GET)
-    public String setRegimenToContinuous(HttpServletRequest request) {
-        //reset any information entered. 
-        rate = 0;
-        hours = 0;
-        regimen = "continuous";
-        return "redirect:/";
-    }
-
     @RequestMapping(value = "/calculateFeeds", method = RequestMethod.POST)
     public String calculateFeeds(HttpServletRequest request, Model model) {
         errorMessage = "";
+        regimen = request.getParameter("regimen");
         try {
             String rateStr = request.getParameter("rate");
             rate = Integer.parseInt(rateStr);
@@ -166,18 +160,19 @@ public class tubefeedingController {
         try {
             String companyIdStr = request.getParameter("company");
             companyId = Integer.parseInt(companyIdStr);
-        } catch(NumberFormatException e){
-            errorMessage = "Please make valid company selection";
-            return "redirect:/";
+        } catch (NumberFormatException e) {
+            //company was not selected.
+            companyId = 0;
+            
         }
-        List<Formula> formulasByCompany = service.getFormulaByCompany(companyId);
+//        List<Formula> formulasByCompany = service.getFormulaByCompany(companyId);
         String formulaIdStr = request.getParameter("formula");
         int formulaId = Integer.parseInt(formulaIdStr);
         Formula formula = service.getFormula(formulaId);
         calculatedFormula = service.calculateContinuousFeeds(formula, rate, hours);
         model.addAttribute("calculatedFormula", calculatedFormula);
-        List<Formula> formulas = service.getAllFormulas();
-        model.addAttribute("formulas", formulas);
+//        List<Formula> formulas = service.getAllFormulas();
+//        model.addAttribute("formulas", formulas);
         return "redirect:/";
 
     }
