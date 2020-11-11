@@ -9,18 +9,18 @@ import com.sg.tubefeeding.model.Company;
 import com.sg.tubefeeding.model.Formula;
 import com.sg.tubefeeding.model.FormulaType;
 import com.sg.tubefeeding.service.tubefeedingService;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import static jdk.nashorn.internal.objects.NativeMath.round;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
