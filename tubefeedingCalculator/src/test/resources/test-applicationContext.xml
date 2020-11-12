@@ -40,7 +40,7 @@
     </bean>
 
     <bean id="tfDao" 
-          class="com.sg.tubefeeding.dao.tubefeedingDaoDbImpl">
+          class="com.sg.tubefeeding.dao.TubeFeedingDaoDbImpl">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 <!--    

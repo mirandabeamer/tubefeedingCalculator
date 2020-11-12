@@ -25,7 +25,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class tubefeedingDaoTest {
 
-    tubefeedingDao dao;
+    TubeFeedingDao dao;
     Formula form;
 
     public tubefeedingDaoTest() {
@@ -45,7 +45,7 @@ public class tubefeedingDaoTest {
 
         ApplicationContext ctx
                 = new ClassPathXmlApplicationContext("test-applicationContext.xml");
-        dao = ctx.getBean("tfDao", tubefeedingDao.class);
+        dao = ctx.getBean("tfDao", TubeFeedingDao.class);
 
         List<Formula> formulas = dao.getAllFormulas();
         for (Formula formula : formulas) {

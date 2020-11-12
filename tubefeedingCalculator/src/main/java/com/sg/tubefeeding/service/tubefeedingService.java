@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author mirandabeamer
  */
-public interface tubefeedingService {
+public interface TubeFeedingService {
 
     public Formula addFormula(Formula formula);
 

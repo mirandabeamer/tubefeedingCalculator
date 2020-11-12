@@ -5,20 +5,19 @@
  */
 package com.sg.tubefeeding.service;
 
-import com.sg.tubefeeding.dao.tubefeedingDao;
 import com.sg.tubefeeding.model.Company;
 import com.sg.tubefeeding.model.Formula;
-
 import java.util.List;
+import com.sg.tubefeeding.dao.TubeFeedingDao;
 
 /**
  *
  * @author mirandabeamer
  */
-public class tubefeedingServiceImpl implements tubefeedingService {
-    tubefeedingDao dao;
+public class TubeFeedingServiceImpl implements TubeFeedingService {
+    TubeFeedingDao dao;
     
-    public tubefeedingServiceImpl(tubefeedingDao dao){
+    public TubeFeedingServiceImpl(TubeFeedingDao dao){
         this.dao = dao;
     }
 

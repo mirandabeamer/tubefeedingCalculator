@@ -1,5 +1,5 @@
 /* global calculateFeeds */
-
+var regimen = "bolus";
 $(document).ready(function () {
     var company = $('#companyName').val();
     var selectedFormula = $('#formulaName').val();
@@ -29,10 +29,41 @@ $(document).ready(function () {
 
     $("#bolus").click(function () {
         fillBolusForm();
+        regimen = "bolus";
     });
 
     $("#continuous").click(function () {
         fillContinuousForm();
+        regimen = "continuous";
+    });
+
+
+
+    $('#submit-button').click(function (event) {
+        var formulaId = $('#formulaName').val();
+        var rate = $('#rate').val();
+        var hours = $('#hours').val();
+        var volume = rate * hours;
+        $.ajax({
+            type: 'POST',
+            url: 'calculateFeeds',
+            data: JSON.stringify({
+                formulaId: formulaId,
+                rate: rate,
+                hours: hours
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            'dataType': 'json',
+            success: function (data) {
+                fillResultsTable(data, volume, rate, hours);
+            },
+            error: function () {
+                alert("error");
+            }
+        });
     });
 });
 
@@ -53,7 +84,7 @@ function fillBolusForm() {
 function fillContinuousForm() {
     var form = $('#rateHoursInput');
     form.empty();
-    var row = '<div class="form-group"><label for="rate">Rate (ml)</label>';
+    var row = '<div class="form-group"><label for="rate">Rate (ml/hr)</label>';
     row += '<input id="rate" class="form-control" name="rate" type="number" value="${rate}" required>';
     row += '</div><div class="form-group"><label for="hours">Hours per day</label>';
     row += '<input id="hours" class="form-control" name="hours" type="number" value="${hours}" required></div>';
@@ -77,7 +108,7 @@ function fillDropDown(data, company, selectedFormula) {
             option.text = formulaName;
             option.value = formulaId;
             dropDown.append(option, dropDown[num]);
-            if(formula.formulaId == selectedFormula){
+            if (formula.formulaId == selectedFormula) {
                 option.selected = true;
             }
         }
@@ -87,3 +118,42 @@ function fillDropDown(data, company, selectedFormula) {
 function clearDropDown() {
     $('#formulaName').empty();
 }
+
+
+function fillResultsTable(data, volume, rate, hours) {
+    var resultsTable = $('#resultsTable');
+    resultsTable.empty();
+    $('#regimenHeading').empty();
+    $('#volumeHeading').empty();
+    var formulaId = data.formulaId;
+    var formulaName = data.formulaName;
+    var calories = data.concentration;
+    var protein = data.protein;
+    var fat = data.fat;
+    var carbs = data.carbohydrate;
+    var fiber = data.fiber;
+    var water = data.water;
+    var phos = data.phosphorus;
+    var potassium = data.potassium;
+    var mlToRDI = data.mlForRdi;
+    var row = '<thead><tr>';
+    row += '<th class="col-sm-8"><h4>Calories</h4></td><th class="col-sm-4"><h5>' + calories + '</h5></th></tr></thead>';
+    row += '<tbody><tr><td>Protein</td><td>' + protein + 'g </td></tr>';
+    row += '<tr><td>Fat</td><td>' + fat + 'g </td></tr>';
+    row += '<tr><td>Carbohydrates</td><td>' + carbs + 'g </td></tr>';
+    row += '<tr><td>Fiber</td><td>' + fiber + 'g </td></tr>';
+    row += '<tr><td>Water</td><td>' + water + 'ml </td></tr>';
+    row += '<tr><td>Phosphorus</td><td>' + phos + 'g </td></tr>';
+    row += '<tr><td>Potassium</td><td>' + potassium + 'g </td></tr>';
+    row += '<tr><td>ml required to meet 100% of RDIs</td><td>' + mlToRDI + 'ml </td></tr></tbody>';
+    resultsTable.append(row);
+    $('#volumeHeading').append('Total daily volume: ' + volume + 'ml');
+    if (regimen === "bolus") {
+        $('#regimenHeading').append(rate + 'ml ' + formulaName + hours + 'x per day');
+    }
+    if (regimen === "continuous") {
+        $('#regimenHeading').append(formulaName + ' @ ' + rate + ' ml/hr x ' + hours + 'hours');
+
+    }
+}
+;

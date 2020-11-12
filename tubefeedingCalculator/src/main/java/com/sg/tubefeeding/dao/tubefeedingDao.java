@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author mirandabeamer
  */
-public interface tubefeedingDao {
+public interface TubeFeedingDao {
     
     public Formula addFormula(Formula formula);
     

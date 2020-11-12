@@ -19,7 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
  *
  * @author mirandabeamer
  */
-public class tubefeedingDaoDbImpl implements tubefeedingDao {
+public class TubeFeedingDaoDbImpl implements TubeFeedingDao {
 
     private JdbcTemplate jdbcTemplate;
 
