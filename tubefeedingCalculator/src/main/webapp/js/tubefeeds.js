@@ -149,7 +149,7 @@ function fillResultsTable(data, volume, rate, hours) {
     resultsTable.append(row);
     $('#volumeHeading').append('Total daily volume: ' + volume + 'ml');
     if (regimen === "bolus") {
-        $('#regimenHeading').append(rate + 'ml ' + formulaName + hours + 'x per day');
+        $('#regimenHeading').append(rate + 'ml ' + formulaName + ' ' + hours + 'x per day');
     }
     if (regimen === "continuous") {
         $('#regimenHeading').append(formulaName + ' @ ' + rate + ' ml/hr x ' + hours + 'hours');
