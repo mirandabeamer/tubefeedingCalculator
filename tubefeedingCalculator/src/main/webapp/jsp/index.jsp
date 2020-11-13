@@ -24,12 +24,10 @@
             <div class="col-lg-6">
                 <br/>
                 <div class="col-lg-12">
-                    <p>${errorMessage}</p>
+                    <p id="errorMessage">${errorMessage}</p>
                     <div class="col-lg-3"></div>
-                    <button class="btn btn-default col-lg-3
-                            <c:if test="${regimen == 'bolus'}">active</c:if>" id="bolus" value="bolus">Bolus</button>
-                    <button class="btn btn-default col-lg-3
-                            <c:if test="${regimen == 'continuous'}">active</c:if>" id="continuous" value="continuous">Continuous</button>
+                    <button class="btn btn-default col-lg-3 active" id="bolus" value="bolus">Bolus</button>
+                    <button class="btn btn-default col-lg-3" id="continuous" value="continuous">Continuous</button>
                 </div>
                     <div class="form-group">
                         <label for ="companyName">Select Company</label>

@@ -30,40 +30,50 @@ $(document).ready(function () {
     $("#bolus").click(function () {
         fillBolusForm();
         regimen = "bolus";
+        $('#bolus').addClass("active");
+        $('#continuous').removeClass("active");
     });
 
     $("#continuous").click(function () {
         fillContinuousForm();
         regimen = "continuous";
+        $('#continuous').addClass("active");
+        $('#bolus').removeClass("active");
     });
 
 
 
     $('#submit-button').click(function (event) {
+        $('#errorMessage').empty();
         var formulaId = $('#formulaName').val();
         var rate = $('#rate').val();
         var hours = $('#hours').val();
         var volume = rate * hours;
-        $.ajax({
-            type: 'POST',
-            url: 'calculateFeeds',
-            data: JSON.stringify({
-                formulaId: formulaId,
-                rate: rate,
-                hours: hours
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            'dataType': 'json',
-            success: function (data) {
-                fillResultsTable(data, volume, rate, hours);
-            },
-            error: function () {
-                alert("error");
-            }
-        });
+        if(rate == "" || hours == ""){
+            $('#errorMessage').append("Please enter valid number");
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: 'calculateFeeds',
+                data: JSON.stringify({
+                    formulaId: formulaId,
+                    rate: rate,
+                    hours: hours
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                'dataType': 'json',
+                success: function (data) {
+                    fillResultsTable(data, volume, rate, hours);
+                    $('#errorMessage').empty();
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
     });
 });
 
