@@ -1,4 +1,7 @@
 
+.page-one {
+    height: 96vh;
+}
 
 .btn {
     margin: 5px;
@@ -12,6 +15,13 @@
     font-family: 'Rammetto One', cursive;
 }
 
+footer {
+    background-color: #1A4465;
+    color: white;
+    text-align: center;
+    height: 4vh;
+}
+
 #tagline {
     color: #A9C2D4;
     font-family: 'times new roman';
@@ -19,6 +29,7 @@
 
 #header {
     font-size: 300%;
+    color: white;
 }
 
 body {
@@ -34,3 +45,6 @@ table {
     border-width: thin;
 }
 
+.copy {
+    display: none;
+}

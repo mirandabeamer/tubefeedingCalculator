@@ -75,6 +75,13 @@ $(document).ready(function () {
             });
         }
     });
+    
+    
+    $('#copy-btn').click(function (event) {
+        var copyText = $('#textToCopy');
+        copyText.select();
+        document.execCommand("Copy");
+    });
 });
 
 
@@ -158,11 +165,17 @@ function fillResultsTable(data, volume, rate, hours) {
     row += '<tr><td>ml required to meet 100% of RDIs</td><td>' + mlToRDI + 'ml </td></tr></tbody>';
     resultsTable.append(row);
     $('#volumeHeading').append('Total daily volume: ' + volume + 'ml');
+    
+    $('.copy').show();
     if (regimen === "bolus") {
         $('#regimenHeading').append(rate + 'ml ' + formulaName + ' ' + hours + 'x per day');
+        $('#textToCopy').val(rate + 'ml bolus of ' + formulaName + '' + hours + 'x/day to provide ' + calories + 
+                'kcals, ' + protein + 'g protein, and ' + water + 'ml free water');
     }
     if (regimen === "continuous") {
         $('#regimenHeading').append(formulaName + ' @ ' + rate + ' ml/hr x ' + hours + 'hours');
+        $('#textToCopy').val(formulaName + ' @ ' + rate + 'ml/hr to provide ' + calories + 'kcals, ' + 
+                protein + 'g protein, and ' + water + 'ml free water x ' + hours + ' hours');
 
     }
 }
