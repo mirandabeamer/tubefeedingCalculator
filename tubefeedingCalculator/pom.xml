@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sg</groupId>
     <artifactId>Tubefeeding</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.3.0</version>
     <packaging>war</packaging>
     <name>Tubefeeding Spring MVC Webapp</name>
     <url>http://maven.apache.org</url>
