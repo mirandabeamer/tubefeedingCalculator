@@ -1,6 +1,14 @@
+body {
+    height: 100%;
+    position: relative;
+}
 
-.page-one {
-    height: 96vh;
+.container {
+    min-height: 80vh;
+    overflow: hidden;
+    display:block;
+    position: relative;
+    padding-bottom: 100px;
 }
 
 .btn {
@@ -16,10 +24,13 @@
 }
 
 footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     background-color: #1A4465;
     color: white;
     text-align: center;
-    height: 4vh;
+    height: 2.5em;
 }
 
 #tagline {
