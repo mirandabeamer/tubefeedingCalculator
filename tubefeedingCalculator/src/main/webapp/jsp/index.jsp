@@ -73,7 +73,7 @@
                     <table class="col-sm-4 table-condensed table" id="resultsTable">
                     </table>
                     <div class="copy">
-                        <textarea class="copy col-lg-12" id="textToCopy"></textarea>
+                        <textarea class="copy col-sm-12 " id="textToCopy"></textarea>
                         <button id="copy-btn">Copy</button>
                     </div>
                 </div>

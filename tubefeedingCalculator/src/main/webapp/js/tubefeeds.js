@@ -144,7 +144,7 @@ function fillResultsTable(data, volume, rate, hours) {
     $('#volumeHeading').empty();
     var formulaId = data.formulaId;
     var formulaName = data.formulaName;
-    var calories = data.concentration;
+    var calories = Math.round(Number(data.concentration));
     var protein = data.protein;
     var fat = data.fat;
     var carbs = data.carbohydrate;
