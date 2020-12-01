@@ -173,7 +173,7 @@ function fillResultsTable(data, volume, rate, hours) {
                 'kcals, ' + protein + 'g protein, and ' + water + 'ml free water');
     }
     if (regimen === "continuous") {
-        $('#regimenHeading').append(formulaName + ' @ ' + rate + ' ml/hr x ' + hours + 'hours');
+        $('#regimenHeading').append(formulaName + ' @ ' + rate + ' ml/hr x ' + hours + ' hours');
         $('#textToCopy').val(formulaName + ' @ ' + rate + 'ml/hr to provide ' + calories + 'kcals, ' + 
                 protein + 'g protein, and ' + water + 'ml free water x ' + hours + ' hours');
 

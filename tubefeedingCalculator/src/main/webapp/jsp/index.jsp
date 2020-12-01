@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Clinikcal</title>
+        <title>CliniKcal</title>
         <!-- Bootstrap core CSS -->
         <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet"> 
         <link href="${pageContext.request.contextPath}/css/tubefeeds.css" rel="stylesheet"> 
@@ -82,7 +82,7 @@
         </div>
         <footer>
             <div class="containter">
-                <p>© 2020 Clinikcal. All Rights Reserved.</p>
+                <p>© 2020 CliniKcal. All Rights Reserved.</p>
             </div>
         </footer>
         <!-- Placed at the end of the document so the pages load faster -->
