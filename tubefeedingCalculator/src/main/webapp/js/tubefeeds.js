@@ -144,7 +144,7 @@ function fillResultsTable(data, volume, rate, hours) {
     $('#volumeHeading').empty();
     var formulaId = data.formulaId;
     var formulaName = data.formulaName;
-    var calories = data.concentration;
+    var calories = Math.round(Number(data.concentration));
     var protein = data.protein;
     var fat = data.fat;
     var carbs = data.carbohydrate;
@@ -169,7 +169,7 @@ function fillResultsTable(data, volume, rate, hours) {
     $('.copy').show();
     if (regimen === "bolus") {
         $('#regimenHeading').append(rate + 'ml ' + formulaName + ' ' + hours + 'x per day');
-        $('#textToCopy').val(rate + 'ml bolus of ' + formulaName + '' + hours + 'x/day to provide ' + calories + 
+        $('#textToCopy').val(rate + 'ml bolus of ' + formulaName + ' ' + hours + 'x/day to provide ' + calories + 
                 'kcals, ' + protein + 'g protein, and ' + water + 'ml free water');
     }
     if (regimen === "continuous") {
